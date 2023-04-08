@@ -26,6 +26,21 @@ module.exports.create = (req, res, next) => {
       .catch(next)
 }
 
+module.exports.edit = (req, res, next) => {
+    const { _id, name, bio } = req.body;
+    let image;
+
+    if (req.file) {
+      image = req.file.path;
+    }
+
+    User.findOneAndUpdate(_id, { name, bio, image})
+    .then((edited) => {
+      res.status(StatusCodes.CREATED).json(edited);
+    })
+    .catch(next)
+}
+
 module.exports.list = (req, res, next) => {
     User.find()
     .then(users => res.json(users))

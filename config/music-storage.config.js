@@ -9,12 +9,12 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET,
 });
 
-const storage = new CloudinaryStorage({
+const storageAudio = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "images/test",
-    allowedFormats: ["jpg", "png"],
+    folder: "audios/test",
+    allowedFormats: ["mp3", "wav"],
   },
 });
 
-module.exports = multer({ storage: storage});
+module.exports = multer({ storageAudio: storageAudio});
