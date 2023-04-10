@@ -20,8 +20,8 @@ router.post('/users/edit', fileUploader.single('image'), usersController.edit);
 router.get('/users/me', authMiddleware.isAuthenticated, usersController.getCurrentUser);
 router.get('/users/:id', usersController.getUser);
 
-
 /* Beats */
-router.post('/audio/upload', beatsController.create);
+router.post('/beats', musicUploader.single('beat'), beatsController.create);
+router.get('/beats/:userId', beatsController.list);
 
 module.exports = router;

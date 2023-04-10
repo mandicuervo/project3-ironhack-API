@@ -14,7 +14,8 @@ const storageAudio = new CloudinaryStorage({
   params: {
     folder: "audios/test",
     allowedFormats: ["mp3", "wav"],
+    resource_type: "auto"
   },
 });
 
-module.exports = multer({ storageAudio: storageAudio});
+module.exports = multer({ storage: storageAudio});
