@@ -26,3 +26,10 @@ module.exports.list = async (req, res, next) => {
   .catch(next)
 }
 
+module.exports.getOneBeat = async (req, res, next) => {
+  const id = req.params.beatId
+
+  Beat.findById(id)
+  .then(beat => res.status(StatusCodes.OK).json(beat))
+  .catch(next)
+}

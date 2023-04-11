@@ -34,6 +34,9 @@ const UserSchema = new mongoose.Schema(
         bio: {
             type: String, 
             minlength: [10, INVALID_LENGTH]
+        },
+        googleID: {
+            type: String,
         }
     },
     {

@@ -7,6 +7,9 @@ const createError = require('http-errors');
 const jwt = require('jsonwebtoken');
 const { StatusCodes } = require('http-status-codes');
 const cors = require('cors');
+require("./config/passport.config");
+const passport = require("passport");
+const session = require('express-session');
 
 //configuración de db
 require('./config/db.config');
@@ -14,10 +17,11 @@ require('./config/db.config');
 //configuración middlewares
 const app = express();
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.CLIENT_URL,
 }))
-
-app.use(logger('dev'));
+app.use(logger("dev"));
+app.use(session({ secret: process.env.SECRET }));
+app.use(passport.initialize());
 app.use(express.json());
 
 //config routes
