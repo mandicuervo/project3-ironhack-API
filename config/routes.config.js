@@ -37,7 +37,7 @@ router.get('/users/:id', usersController.getUser);
 router.post('/beats', musicUploader.single('beat'), /*fileUploader.single('image'),*/ beatsController.create);
 router.get('/beats/:userId', beatsController.list);
 router.get('/beat/:beatId', beatsController.getOneBeat);
-// router.post('/beat/edit/:id', fileUploader.single('beat'), beatsController.editBeat);
+router.post('/beat/edit/:id', fileUploader.single('image'), beatsController.editBeat);
 router.delete("/beats/delete/:id", beatsController.deleteBeat);
 // router.get("/beats/reviews/:id", beatsController.getReviews);
 

@@ -30,12 +30,12 @@ const BeatSchema = new mongoose.Schema({
   key: {
     type: String, 
     require: [true, REQUIRED_FIELD],
-    enum: ['None', 'Cm', 'Dm', 'Em', 'Fm', 'Am', 'Gm', 'F#M', 'Bm', 'D#M', 'A#M', 'EbM', 'AbM', 'BbM', 'C#M', 'DbM', 'GbM', 'CbM', 'G#M', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'] 
+    enum: ['Cm', 'Dm', 'Em', 'Fm', 'Am', 'Gm', 'F#M', 'Bm', 'D#M', 'A#M', 'EbM', 'AbM', 'BbM', 'C#M', 'DbM', 'GbM', 'CbM', 'G#M', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'] 
   },
   scale: {
     type: String,
     require: [true, REQUIRED_FIELD],
-    enum: ['minor', 'major']
+    enum: ['Minor', 'Major']
   },
   genre: {
     type: String,
