@@ -34,9 +34,11 @@ router.get('/users/me', authMiddleware.isAuthenticated, usersController.getCurre
 router.get('/users/:id', usersController.getUser);
 
 /* Beats */
-router.post('/beats', musicUploader.single('beat'), beatsController.create);
+router.post('/beats', musicUploader.single('beat'), /*fileUploader.single('image'),*/ beatsController.create);
 router.get('/beats/:userId', beatsController.list);
-router.get('/beat/:beatId', beatsController.getOneBeat)
-
+router.get('/beat/:beatId', beatsController.getOneBeat);
+// router.post('/beat/edit/:id', fileUploader.single('beat'), beatsController.editBeat);
+router.delete("/beats/delete/:id", beatsController.deleteBeat);
+// router.get("/beats/reviews/:id", beatsController.getReviews);
 
 module.exports = router;

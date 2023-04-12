@@ -20,7 +20,11 @@ app.use(cors({
     origin: process.env.CLIENT_URL,
 }))
 app.use(logger("dev"));
-app.use(session({ secret: process.env.SECRET }));
+app.use(session({
+    secret: process.env.SECRET,
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(express.json());
 

@@ -59,6 +59,20 @@ UserSchema.virtual("beat", {
     justOne: true,
 });
 
+UserSchema.virtual("like", {
+    ref: "Like",
+    localField: "_id",
+    foreignField: "owner",
+    justOne: true,
+});
+
+UserSchema.virtual("review", {
+    ref: "Review",
+    localField: "_id",
+    foreignField: "owner",
+    justOne: true,
+});
+
 UserSchema.pre('save', function(next) {
     if (this.isModified('password')) {
         bcrypt.hash(this.password, ROUNDS)
