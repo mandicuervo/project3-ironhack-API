@@ -41,4 +41,8 @@ router.post('/beat/edit/:id', fileUploader.single('image'), beatsController.edit
 router.delete("/beats/delete/:id", beatsController.deleteBeat);
 // router.get("/beats/reviews/:id", beatsController.getReviews);
 
+/* PAYMENTS */
+// router.post("/create-payment-intent/reserve", paymentController.loadReservePaymentScreen);
+//router.post("/create-payment-intent/bills", paymentController.loadBillsPaymentScreen);
+
 module.exports = router;

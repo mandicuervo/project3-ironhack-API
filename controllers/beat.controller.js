@@ -2,8 +2,8 @@ const { StatusCodes } = require('http-status-codes');
 const Beat = require('../models/Beat.model');
 
 module.exports.create = async (req, res, next) => {
-  console.log(req.file)
-    let { _id, name, price, bpm, key, scale, genre, mood, instrument } = req.body;
+  console.log(req.body)
+    let { _id, name, price, bpm, key, scale, genre, mood, instrument, tags } = req.body;
     let beat;
 
     if (req.file) {
@@ -14,7 +14,7 @@ module.exports.create = async (req, res, next) => {
       price = Number(price).toFixed(2);
     }
 
-    Beat.create({ owner: _id, name, price, bpm, key, scale, genre, mood, instrument, beat })
+    Beat.create({ owner: _id, name, price, bpm, key, scale, genre, mood, instrument, beat, tags })
      .then(beatCreate => {
         res.status(StatusCodes.CREATED).json(beatCreate)
       })
