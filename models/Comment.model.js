@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const { REQUIRED_FIELD } = require('../config/errorMessages');
+
 
 const ReviewSchema = new mongoose.Schema(
   {
@@ -10,16 +12,11 @@ const ReviewSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Beat'
     },
-    score: {
-        type: Number,
-        minValue: 1,
-        maxValue: 5,
-        required: [true, 'Give a score from 1 to 5']
-    },
     comment: {
         type: String,
-        required: [true, 'Comment your review'],
-        minLength: [30, 'The review comment must have at least 30 characters'] 
+        required: [true, 'Comment what you think about this beat'],
+        minLength: [3, 'The comment must have at least 3 characters'],
+        required: [true, REQUIRED_FIELD]
     }
   },
   {

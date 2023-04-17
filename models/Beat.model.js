@@ -6,6 +6,10 @@ const BeatSchema = new mongoose.Schema({
     type: String,
     required: [true, REQUIRED_FIELD],
   },
+  available: {
+    type: Boolean,
+    default: true
+  },
   name: {
     type: String,
     required: [true, REQUIRED_FIELD],
@@ -54,8 +58,15 @@ const BeatSchema = new mongoose.Schema({
     type: String,
     require: [true, REQUIRED_FIELD],
     enum: ['Percussion', 'Piano', 'Bass Guitar', 'Electric Guitar', 'Acoustic Guitar', 'Strings', 'Violin', 'Brass', 'Flute', 'Cymbals', 'Organ', 'Trumpet', 'Viola', 'Cello', 'Saxophone', 'Double Bass', 'Recorder', 'Banjo', 'Tambourine', 'Triangle', 'French HOrn', 'Ukulele', 'Trombone', 'Sitar', 'Harmonica', 'Piccolo', 'Harpsichord', 'Bassoon', 'Maracas', 'Clarinet', 'Mnadolin', 'Tuba', 'Oboe', 'Lute', 'Castanets', 'Bugle', 'Gong']
+  },
+  playingCount: {
+    type: Number,
+    default: 0
+  },
+  favoriteCount: {
+    type: Number,
+    default: 0
   }
-  
 });
 
 const Beat = mongoose.model('Beat', BeatSchema);

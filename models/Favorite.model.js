@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const likeSchema = new mongoose.Schema(
+const favoriteSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Types.ObjectId,
       ref: 'User',
-      required: [true, 'A like must have a user']
+      required: [true, 'A favorite must have a user']
     },
     beat: {
       type: mongoose.Types.ObjectId,
@@ -37,6 +37,6 @@ const likeSchema = new mongoose.Schema(
   }
 );
 
-const Like = mongoose.model('Like', likeSchema);
+const Favorite = mongoose.model('Favorite', favoriteSchema);
 
-module.exports = Like;
+module.exports = Favorite;

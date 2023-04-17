@@ -3,7 +3,9 @@ const fileUploader = require('./storage.config');
 const musicUploader = require('./music-storage.config');
 const authController = require('../controllers/auth.controller');
 const usersController = require('../controllers/users.controller');
-const beatsController = require('../controllers/beat.controller')
+const beatsController = require('../controllers/beat.controller');
+const commentsController = require('../controllers/comments.controller');
+
 require("./passport.config");
 const passport = require("passport");
 const SCOPES = ["profile", "email"];
@@ -32,14 +34,22 @@ router.get('/users', usersController.list);
 router.post('/users/edit', fileUploader.single('image'), usersController.edit);
 router.get('/users/me', authMiddleware.isAuthenticated, usersController.getCurrentUser);
 router.get('/users/:id', usersController.getUser);
+router.get('/users/username/:username', usersController.getUserByUsername);
+
 
 /* Beats */
-router.post('/beats', musicUploader.single('beat'), /*fileUploader.single('image'),*/ beatsController.create);
+router.post('/beats', musicUploader.single('beat'), beatsController.create);
 router.get('/beats/:userId', beatsController.list);
 router.get('/beat/:beatId', beatsController.getOneBeat);
 router.post('/beat/edit/:id', fileUploader.single('image'), beatsController.editBeat);
 router.delete("/beats/delete/:id", beatsController.deleteBeat);
-// router.get("/beats/reviews/:id", beatsController.getReviews);
+
+/*comments and favorite*/
+router.post("/beat/comments/:id", commentsController.createComment);
+router.get("/beat/comments/:id", commentsController.getBeatComments);
+router.delete("/beat/comments/:id", commentsController.deleteComment);
+router.post('/beat/favorite/:id', commentsController.toggleFavorite);
+router.post("/beat/favorite/one/:id", commentsController.getIsFavorited);
 
 /* PAYMENTS */
 // router.post("/create-payment-intent/reserve", paymentController.loadReservePaymentScreen);

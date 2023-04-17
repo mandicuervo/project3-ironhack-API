@@ -25,6 +25,7 @@ module.exports.list = async (req, res, next) => {
   const id = req.params.userId
 
   Beat.find({ owner: id })
+  .populate('owner')
   .then(beats => res.status(StatusCodes.OK).json(beats))
   .catch(next)
 }
@@ -33,6 +34,7 @@ module.exports.getOneBeat = async (req, res, next) => {
   const id = req.params.beatId
 
   Beat.findById(id)
+  .populate('owner')
   .then(beat => res.status(StatusCodes.OK).json(beat))
   .catch(next)
 }

@@ -59,15 +59,15 @@ UserSchema.virtual("beat", {
     justOne: true,
 });
 
-UserSchema.virtual("like", {
-    ref: "Like",
+UserSchema.virtual("favorite", {
+    ref: "Favorite",
     localField: "_id",
     foreignField: "owner",
     justOne: true,
 });
 
-UserSchema.virtual("review", {
-    ref: "Review",
+UserSchema.virtual("comment", {
+    ref: "Comment",
     localField: "_id",
     foreignField: "owner",
     justOne: true,

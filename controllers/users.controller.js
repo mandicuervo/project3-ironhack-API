@@ -71,3 +71,10 @@ module.exports.getCurrentUser = (req, res, next) => {
     .catch(next)
 }
 
+module.exports.getUserByUsername = (req, res, next) => {
+  const { username } = req.params;
+
+  User.findOne({username})
+  .then(user => res.json(user))
+  .catch(next)
+}
