@@ -84,11 +84,8 @@ module.exports.beatsFromUser = (req, res, next) => {
 
 }
 
-module.exports.getTopBeats = (req, res, next) => {
-
-  console.log('entra')
-  
-  Beat.find().sort({playingCount: 1}).limit(2)
+module.exports.getTopBeats = (req, res, next) => {  
+  Beat.find().sort({playingCount: -1}).limit(10)
   .then(list => res.json(list))
   .catch(next)
 }

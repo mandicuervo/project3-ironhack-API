@@ -49,7 +49,6 @@ router.put("/beat/count/:id", beatsController.addCountPlayer);
 router.get("/beats/count/:id", beatsController.beatsFromUser);
 
 
-
 /*comments and favorite*/
 router.post("/beat/comments/:id", commentsController.createComment);
 router.get("/beat/comments/:id", commentsController.getBeatComments);
