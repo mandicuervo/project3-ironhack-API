@@ -5,6 +5,7 @@ const authController = require('../controllers/auth.controller');
 const usersController = require('../controllers/users.controller');
 const beatsController = require('../controllers/beat.controller');
 const commentsController = require('../controllers/comments.controller');
+const paymentController = require('../controllers/payment.controller');
 
 require("./passport.config");
 const passport = require("passport");
@@ -39,10 +40,15 @@ router.get('/users/username/:username', usersController.getUserByUsername);
 
 /* Beats */
 router.post('/beats', musicUploader.single('beat'), beatsController.create);
+router.get("/beats/top", beatsController.getTopBeats);
 router.get('/beats/:userId', beatsController.list);
 router.get('/beat/:beatId', beatsController.getOneBeat);
 router.post('/beat/edit/:id', fileUploader.single('image'), beatsController.editBeat);
 router.delete("/beats/delete/:id", beatsController.deleteBeat);
+router.put("/beat/count/:id", beatsController.addCountPlayer);
+router.get("/beats/count/:id", beatsController.beatsFromUser);
+
+
 
 /*comments and favorite*/
 router.post("/beat/comments/:id", commentsController.createComment);
@@ -52,7 +58,7 @@ router.post('/beat/favorite/:id', commentsController.toggleFavorite);
 router.post("/beat/favorite/one/:id", commentsController.getIsFavorited);
 
 /* PAYMENTS */
-// router.post("/create-payment-intent/reserve", paymentController.loadReservePaymentScreen);
-//router.post("/create-payment-intent/bills", paymentController.loadBillsPaymentScreen);
+router.post("/create-payment-intent/reserve", paymentController.loadReservePaymentScreen);
+router.post("/create-payment-intent/bills", paymentController.loadBillsPaymentScreen);
 
 module.exports = router;

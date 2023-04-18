@@ -27,14 +27,14 @@ module.exports.create = (req, res, next) => {
 }
 
 module.exports.edit = (req, res, next) => {
-    const { _id, name, bio } = req.body;
+    const { _id, name, bio, username } = req.body;
     let image;
 
     if (req.file) {
       image = req.file.path;
     }
 
-    User.findOneAndUpdate(_id, { name, bio, image})
+    User.findOneAndUpdate(_id, { name, bio, image, username})
     .then((edited) => {
       res.status(StatusCodes.CREATED).json(edited);
     })

@@ -3,25 +3,25 @@ const stripe = StripePackage(process.env.STRIPE_API_KEY);
 
 module.exports.loadReservePaymentScreen = (req, res, next) => {
     console.log('entra')
-    // const { id } = req.body;
+    const { id } = req.body;
 
-    // Property.findOne({ id })
-    // .then((property) => {
-    //     stripe.paymentIntents.create({
-    //     amount: property.reservationPrice,
-    //     currency: "eur",
-    //     automatic_payment_methods: {
-    //         enabled: false,
-    //     }
-    //     })
-    //     .then((paymentIntent) => {
-    //         res.send({
-    //         clientSecret: paymentIntent.client_secret,
-    //         reservationPrice: property.reservationPrice
-    //         });
-    //     })
-    //     .catch(next);
-    // })
+    Property.findOne({ id })
+    .then((property) => {
+        stripe.paymentIntents.create({
+        amount: property.reservationPrice,
+        currency: "eur",
+        automatic_payment_methods: {
+            enabled: false,
+        }
+        })
+        .then((paymentIntent) => {
+            res.send({
+            clientSecret: paymentIntent.client_secret,
+            reservationPrice: property.reservationPrice
+            });
+        })
+        .catch(next);
+    })
 }
 
 module.exports.loadBillsPaymentScreen = (req, res, next) => {

@@ -62,3 +62,33 @@ module.exports.deleteBeat = (req, res, next) => {
   .then(beat => res.status(StatusCodes.OK).json(beat))
   .catch(next)
 }
+
+module.exports.addCountPlayer = (req, res, next) => {
+  const {id} = req.params
+
+  Beat.findById(id)
+  .then(beat => {
+    let sum = beat.playingCount + 1;
+    beat.playingCount = sum;
+    beat.save()
+  })
+  .catch(next)
+}
+
+module.exports.beatsFromUser = (req, res, next) => {
+  const {id} = req.params
+
+  Beat.find({user: id})
+  .then(beatsList => res.json(beatsList))
+  .catch(next)
+
+}
+
+module.exports.getTopBeats = (req, res, next) => {
+
+  console.log('entra')
+  
+  Beat.find().sort({playingCount: 1}).limit(2)
+  .then(list => res.json(list))
+  .catch(next)
+}
