@@ -12,6 +12,7 @@ const BeatSchema = new mongoose.Schema({
   },
   name: {
     type: String,
+    index: true,
     required: [true, REQUIRED_FIELD],
   },
   price: {
@@ -68,6 +69,8 @@ const BeatSchema = new mongoose.Schema({
     default: 0
   }
 });
+
+BeatSchema.index({name: 'text'}, {instrument: 'text'});
 
 const Beat = mongoose.model('Beat', BeatSchema);
 

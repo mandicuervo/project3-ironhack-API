@@ -47,6 +47,7 @@ router.post('/beat/edit/:id', fileUploader.single('image'), beatsController.edit
 router.delete("/beats/delete/:id", beatsController.deleteBeat);
 router.put("/beat/count/:id", beatsController.addCountPlayer);
 router.get("/beats/count/:id", beatsController.beatsFromUser);
+router.get("/search/:searchText", beatsController.resultsFromSearch);
 
 
 /*comments and favorite*/

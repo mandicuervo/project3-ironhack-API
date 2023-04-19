@@ -89,3 +89,11 @@ module.exports.getTopBeats = (req, res, next) => {
   .then(list => res.json(list))
   .catch(next)
 }
+
+module.exports.resultsFromSearch = (req, res, next) => {
+  const { searchText } = req.params;
+  
+  Beat.find({ $text: { $search: searchText }})
+  .then(list => res.json(list))
+  .catch(err => console.log(err))
+}
