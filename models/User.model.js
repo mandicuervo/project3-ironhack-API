@@ -13,7 +13,8 @@ const UserSchema = new mongoose.Schema(
         },
         username: {
             type: String, 
-            required: [true, REQUIRED_FIELD]
+            required: [true, REQUIRED_FIELD],
+            index: true
         },
         email: {
             type: String,
@@ -51,6 +52,8 @@ const UserSchema = new mongoose.Schema(
         }
     }
 )
+
+UserSchema.index({username: 'text'});
 
 UserSchema.virtual("beat", {
     ref: "Beat",

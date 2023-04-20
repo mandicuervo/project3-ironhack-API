@@ -53,7 +53,8 @@ const BeatSchema = new mongoose.Schema({
     enum: ['Bouncy', 'Dark', 'Energetic', 'Confident', 'Calm', 'Sad', 'Soulful', 'Inspiring', 'Angry', 'Relaxes', 'Quirky', 'Mellow', 'Accomplished', 'Crazy', 'Happy', 'Determoned', 'Powerful', 'Epic', 'Intense', 'Loved', 'Dirty', 'Depressed', 'Lonely', 'Evil', 'Hyper', 'Peaceful', 'Anxious', 'Flirty', 'Gloomy', 'Rebellious', 'Grateful', 'Adored', 'Eccentric', 'Neutral', 'Romantic', 'Crunk', 'Enraged', 'Annoyed', 'Lazy', 'Disappointed', 'Exciting', 'Tense', 'Giddy', 'Scared', 'Dramatic', 'Frantic', 'Silly', 'Majestic']
   },
   tags: {
-    type: [String], 
+    type: String,
+    index: true
   },
   instrument: {
     type: String,
@@ -70,7 +71,7 @@ const BeatSchema = new mongoose.Schema({
   }
 });
 
-BeatSchema.index({name: 'text'}, {instrument: 'text'});
+BeatSchema.index({tags: 'text'});
 
 const Beat = mongoose.model('Beat', BeatSchema);
 

@@ -1,8 +1,8 @@
 const { StatusCodes } = require('http-status-codes');
 const Beat = require('../models/Beat.model');
+const User = require('../models/User.model');
 
 module.exports.create = async (req, res, next) => {
-  console.log(req.body)
     let { _id, name, price, bpm, key, scale, genre, mood, instrument, tags } = req.body;
     let beat;
 
@@ -49,7 +49,6 @@ module.exports.editBeat = (req, res, next) => {
     editBeat.image = req.file.path;
   }
 
-  console.log(editBeat)
   Beat.findByIdAndUpdate(id, editBeat)
   .then(beat => res.status(StatusCodes.OK).json(beat))
   .catch(next)
@@ -93,7 +92,17 @@ module.exports.getTopBeats = (req, res, next) => {
 module.exports.resultsFromSearch = (req, res, next) => {
   const { searchText } = req.params;
   
-  Beat.find({ $text: { $search: searchText }})
-  .then(list => res.json(list))
+  Beat.find({ tags: {"$regex":`^${searchText}*`}})
+  .populate('owner')
+  .then(beats => {
+    User.find({ username: {"$regex":`^${searchText}*`}})
+    .then(users => {
+      let infoToSend = {
+        beats,
+        users
+      }
+      res.json(infoToSend)
+    })
+  })
   .catch(err => console.log(err))
 }

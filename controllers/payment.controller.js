@@ -1,12 +1,13 @@
 const StripePackage = require('stripe');
 const stripe = StripePackage(process.env.STRIPE_API_KEY);
+const Beat = require('../models/Beat.model');
 
 module.exports.loadReservePaymentScreen = (req, res, next) => {
     console.log('entra')
     const { id } = req.body;
 
-    Property.findOne({ id })
-    .then((property) => {
+    Beat.findOne({ id })
+    .then((beat) => {
         stripe.paymentIntents.create({
         amount: property.reservationPrice,
         currency: "eur",
