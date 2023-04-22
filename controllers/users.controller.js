@@ -33,8 +33,8 @@ module.exports.edit = (req, res, next) => {
     if (req.file) {
       image = req.file.path;
     }
-
-    User.findOneAndUpdate(_id, { name, bio, image, username})
+    
+    User.findByIdAndUpdate(_id, { name, bio, image, username})
     .then((edited) => {
       res.status(StatusCodes.CREATED).json(edited);
     })

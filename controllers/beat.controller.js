@@ -1,6 +1,7 @@
 const { StatusCodes } = require('http-status-codes');
 const Beat = require('../models/Beat.model');
 const User = require('../models/User.model');
+const Favorite = require('../models/Favorite.model');
 
 module.exports.create = async (req, res, next) => {
     let { _id, name, price, bpm, key, scale, genre, mood, instrument, tags } = req.body;
@@ -77,7 +78,7 @@ module.exports.addCountPlayer = (req, res, next) => {
 module.exports.beatsFromUser = (req, res, next) => {
   const {id} = req.params
 
-  Beat.find({user: id})
+  Beat.find({owner: id})
   .then(beatsList => res.json(beatsList))
   .catch(next)
 
@@ -105,4 +106,16 @@ module.exports.resultsFromSearch = (req, res, next) => {
     })
   })
   .catch(err => console.log(err))
+}
+
+module.exports.getFavorites = (req, res, next ) => {
+  const { id } = req.params;
+  
+  Favorite.find({user: id})
+  .populate('beat')
+  .then(list => {
+    console.log(list)
+    res.json(list)
+  })
+  .catch(next)
 }
